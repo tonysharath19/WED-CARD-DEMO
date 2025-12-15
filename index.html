@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Royal Wedding Invitation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#f9f1df;
+  --paper:#fff6e2;
+  --paper-dark:#ecd7b8;
+  --royal:#6b1f2a;
+  --text:#4a2f1a;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family: Georgia, serif;
+  background:var(--bg);
+  overflow:hidden;
+}
+
+/* ========= LANDING ========= */
+#landing{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:radial-gradient(circle,#fff8ea,#e7cfaa);
+  z-index:10;
+}
+
+.scroll-wrapper{width:340px;cursor:pointer}
+.rod{
+  height:14px;
+  background:linear-gradient(90deg,#5a3a22,#d6b77c,#5a3a22);
+  border-radius:10px;
+}
+.scroll{
+  height:160px;
+  overflow:hidden;
+  background:linear-gradient(var(--paper),var(--paper-dark));
+  box-shadow:0 40px 70px rgba(0,0,0,.3);
+  transition:height 5s cubic-bezier(.2,.8,.2,1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.scroll-text{
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  color: var(--text);
+  text-align: center;
+  letter-spacing: 1px;
+  transition: opacity .4s ease;
+}
+
+.scroll-text.hidden{opacity:0}
+
+/* ========= APP ========= */
+#app{display:none;height:100vh}
+
+header{
+  height:60px;
+  background:linear-gradient(#7b2835,#53151f);
+  color:#f8e8c6;
+  font-family:'Playfair Display SC', serif;
+  letter-spacing:3px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ========= CAROUSEL ========= */
+.carousel{
+  height:calc(100vh - 120px);
+  overflow:hidden;
+  position:relative;
+}
+
+.track{
+  display:flex;
+  height:100%;
+  transition:transform .7s ease;
+}
+
+.page{
+  min-width:100%;
+  height:100%;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+}
+
+/* Paper turn shadow */
+.page::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:80px;
+  height:100%;
+  background:linear-gradient(to left,rgba(0,0,0,.35),transparent);
+  opacity:0;
+  transition:opacity .25s ease;
+}
+.page.turning::after{opacity:1}
+
+/* Hovering texture (first image only) */
+.page.texture::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,.03),
+      rgba(0,0,0,.03) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  animation:float 8s linear infinite;
+  pointer-events:none;
+}
+@keyframes float{
+  from{transform:translateY(0)}
+  to{transform:translateY(-40px)}
+}
+
+/* Swipe hint */
+.swipe-hint{
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,.45);
+  color:#fff;
+  padding:8px 16px;
+  border-radius:20px;
+  font-size:.75rem;
+  animation:swipe 1.6s infinite;
+}
+@keyframes swipe{
+  0%{transform:translate(-50%,0)}
+  50%{transform:translate(-65%,0)}
+  100%{transform:translate(-50%,0)}
+}
+
+/* ========= FOOTER ========= */
+footer{
+  height:60px;
+  background:linear-gradient(#53151f,#2d0a10);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+}
+
+footer .btns{display:flex;gap:16px}
+footer button,a{
+  background:none;
+  border:1px solid #f7e7c3;
+  color:#f7e7c3;
+  padding:6px 14px;
+  border-radius:18px;
+  font-size:.8rem;
+  text-decoration:none;
+}
+footer small{font-size:.65rem;color:#e8d2a6}
+
+/* ========= RSVP ========= */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+}
+
+.box{
+  background:linear-gradient(#fff6e2,#ecd7b8);
+  padding:20px;
+  border-radius:12px;
+  width:90%;
+  max-width:340px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  top:10px;
+  right:12px;
+  cursor:pointer;
+}
+
+.box h3{
+  font-family:'Playfair Display SC', serif;
+  text-align:center;
+  margin-bottom:12px;
+  color:var(--royal);
+}
+
+.box input, .box select{
+  width:100%;
+  margin-bottom:10px;
+  padding:8px;
+}
+
+.box button{
+  width:100%;
+  padding:8px;
+  background:var(--royal);
+  color:#fff;
+  border:none;
+  border-radius:6px;
+}
+
+.page{
+  background-size: cover;
+  background-position: center;
+}
+
+
+</style>
+</head>
+
+<body>
+
+<!-- LANDING -->
+<div id="landing">
+  <div class="scroll-wrapper" id="openScroll">
+    <div class="rod"></div>
+    <div class="scroll" id="scroll">
+      <div class="scroll-text" id="scrollText">Tap to Unveil the Invitation</div>
+    </div>
+    <div class="rod"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+<header>Wedding</header>
+
+<div class="carousel">
+    <div class="track" id="track">
+        <div class="page texture"
+             style="background-image:url('./WED-CANVA-MULTI-15/1.png')">
+          <div class="swipe-hint" id="hint">Swipe to continue →</div>
+        </div>
+      
+        <div class="page"
+             style="background-image:url('./WED-CANVA-MULTI-15/2.png')"></div>
+      
+        <div class="page"
+             style="background-image:url('./WED-CANVA-MULTI-15/3.png')"></div>
+      
+        <div class="page"
+             style="background-image:url('./WED-CANVA-MULTI-15/4.png')"></div>
+      
+        <div class="page"
+             style="background-image:url('./WED-CANVA-MULTI-15/5.png')"></div>
+      </div>
+      
+      
+</div>
+
+<footer>
+  <div class="btns">
+    <a href="#">About Us</a>
+    <button onclick="openRSVP()">RSVP</button>
+    <a href="https://www.google.com/maps?q=Bangalore" target="_blank">Location</a>
+  </div>
+  <small>© 2025 / Raya</small>
+</footer>
+</div>
+
+<!-- RSVP -->
+<div class="modal" id="rsvp">
+  <div class="box">
+    <div class="close" onclick="closeRSVP()">✕</div>
+    <h3>RSVP</h3>
+    <input placeholder="Full Name">
+    <input placeholder="Phone / Email">
+    <select>
+      <option>Will you attend?</option>
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+    <input placeholder="Number of Guests">
+    <button onclick="closeRSVP()">Submit</button>
+  </div>
+</div>
+
+<script>
+const openScroll=document.getElementById("openScroll");
+const scroll=document.getElementById("scroll");
+const scrollText=document.getElementById("scrollText");
+const landing=document.getElementById("landing");
+const app=document.getElementById("app");
+const track=document.getElementById("track");
+const pages=document.querySelectorAll(".page");
+const hint=document.getElementById("hint");
+const rsvp=document.getElementById("rsvp");
+
+/* Scroll */
+openScroll.onclick=()=>{
+  scrollText.classList.add("hidden");
+  setTimeout(()=>{
+    scrollText.textContent="Kumar’s Family invites you";
+    scrollText.classList.remove("hidden");
+    
+  },400);
+  scroll.style.height="92vh";
+  setTimeout(()=>{
+    landing.style.display="none";
+    app.style.display="block";
+  },5000);
+};
+
+/* Swipe */
+let i=0,sx=0;
+track.addEventListener("touchstart",e=>sx=e.touches[0].clientX);
+track.addEventListener("touchend",e=>{
+  const d=e.changedTouches[0].clientX-sx;
+  pages[i].classList.add("turning");
+
+  if(d<-60 && i<4) i++;
+  if(d>60 && i>0) i--;
+
+  track.style.transform=`translateX(-${i*100}%)`;
+
+  if(hint) hint.remove();
+  setTimeout(()=>pages.forEach(p=>p.classList.remove("turning")),300);
+});
+
+/* RSVP */
+function openRSVP(){rsvp.style.display="flex"}
+function closeRSVP(){rsvp.style.display="none"}
+</script>
+
+</body>
+</html>
