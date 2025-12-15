@@ -2,269 +2,247 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1,
+               maximum-scale=1,
+               viewport-fit=cover">
+
 <title>Royal Wedding Invitation</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@600&family=Cinzel:wght@600;700&family=Great+Vibes&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@600&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
 :root{
-  --bg:#f9f1df;--paper:#fff6e2;--paper2:#f3e2c5;--paper3:#e6cfaa;
-  --ink:#2b140c;--royal:#6b1f2a;--velvet:#2b0b12;--velvet2:#14070a;
-  --gold:#d4af37;--gold2:#ffdf7a;--champ:#fff6e9;--rose:#e11d48;--rose2:#ff6fa1;
-  --shadow:rgba(0,0,0,.45);--vh:1vh;
+  --bg:#f9f1df;
+  --paper:#fff6e2;
+  --ink:#2b140c;
+  --royal:#6b1f2a;
+  --gold:#d4af37;
 }
+
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%}
-body{font-family:Georgia,serif;background:var(--bg);overflow-x:hidden}
-a,button{font-family:inherit}
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;               /* 🔑 LOCK SCROLL */
+}
 
-/* ===== LANDING (premium velvet + subtle texture) ===== */
+body{
+  font-family:Georgia,serif;
+  background:var(--bg);
+  overscroll-behavior:none;      /* iOS bounce fix */
+}
+
+/* ================= LANDING ================= */
 #landing{
-  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;z-index:10;
-  background:radial-gradient(ellipse at 50% 35%,#fff8ea 0%,#f3e5cf 38%,#e7cfaa 78%,#d4b896 100%);
-  transition:background 1.2s ease,filter 1.2s ease;
-}
-#landing::before{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.14;mix-blend-mode:multiply;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-  background-size:220px 220px;
-}
-#landing::after{
-  content:"";position:absolute;inset:-40px;pointer-events:none;opacity:.55;
-  background:radial-gradient(circle at 50% 40%,transparent 0 52%,rgba(0,0,0,.35) 70%,rgba(0,0,0,.55) 100%);
-}
-#landing.magical{
-  background:
-    radial-gradient(ellipse at 50% 28%,rgba(255,223,122,.10) 0 24%,transparent 55%),
-    radial-gradient(ellipse at 60% 40%,rgba(255,111,161,.10) 0 18%,transparent 55%),
-    radial-gradient(ellipse at 50% 35%,var(--velvet2) 0%,#1a0810 18%,#2a0c18 38%,#4b0f23 62%,#1a0810 100%);
-  filter:saturate(1.06) contrast(1.06);
-}
-#landing.magical::before{opacity:.22}
-#landing.magical::after{opacity:.65}
-
-/* Premium bokeh hearts (slow, soft, not flashy) */
-.bokeh{position:absolute;inset:auto;pointer-events:none;opacity:0;mix-blend-mode:screen;filter:blur(.4px);transform:translateZ(0)}
-#landing.magical .bokeh{opacity:1}
-.bokeh{
-  width:var(--s);height:var(--s);left:var(--x);top:var(--y);
-  background-repeat:no-repeat;background-size:contain;background-position:center;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 54C21 45 8 35 8 22c0-7 5-12 12-12 5 0 9 3 12 7 3-4 7-7 12-7 7 0 12 5 12 12 0 13-13 23-24 32Z' fill='rgba(255,223,122,0.35)'/%3E%3C/svg%3E");
-  animation:bokehDrift var(--t) ease-in-out infinite;
-}
-.bokeh.alt{
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 54C21 45 8 35 8 22c0-7 5-12 12-12 5 0 9 3 12 7 3-4 7-7 12-7 7 0 12 5 12 12 0 13-13 23-24 32Z' fill='rgba(255,111,161,0.25)'/%3E%3C/svg%3E");
-}
-@keyframes bokehDrift{
-  0%,100%{transform:translateY(0) scale(1);opacity:.85}
-  50%{transform:translateY(-14px) scale(1.04);opacity:1}
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--bg);
+  z-index:10;
 }
 
-/* Elegant corner florals (your existing .magic flower divs become premium corners) */
-.magic{position:absolute;opacity:0;pointer-events:none;transition:opacity .9s ease}
-.magic.show{opacity:1;animation:cornerBreath 10s ease-in-out infinite}
-@keyframes cornerBreath{
-  0%,100%{transform:rotate(var(--rot)) translateY(0)}
-  50%{transform:rotate(var(--rot)) translateY(-6px)}
-}
-.flower{
-  width:150px;height:150px;opacity:.92;filter:drop-shadow(0 16px 22px rgba(0,0,0,.35));
-  background-repeat:no-repeat;background-size:contain;background-position:center;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23ffdf7a' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M28 198C58 148 64 120 96 92c30-26 70-44 96-70'/%3E%3Cpath d='M62 170c18-8 24-18 26-34'/%3E%3Cpath d='M98 120c22 2 34-10 44-28'/%3E%3C/g%3E%3Cg%3E%3Cpath d='M88 100c-18-6-24-22-16-36 16 6 28 18 16 36Z' fill='rgba(255,111,161,0.22)' stroke='%23ffdf7a' stroke-width='2'/%3E%3Cpath d='M126 74c-16-2-26-14-22-28 16 2 28 12 22 28Z' fill='rgba(255,223,122,0.16)' stroke='%23ffdf7a' stroke-width='2'/%3E%3Ccircle cx='112' cy='90' r='7' fill='rgba(255,223,122,0.55)'/%3E%3Ccircle cx='112' cy='90' r='11' fill='none' stroke='%23d4af37' stroke-width='2' opacity='.7'/%3E%3C/g%3E%3C/svg%3E");
-}
-.f1{top:6%;left:4%;--rot:0deg}
-.f2{top:6%;right:4%;--rot:90deg}
-.f3{bottom:6%;left:4%;--rot:-90deg}
-.f4{bottom:6%;right:4%;--rot:180deg}
-
-/* Subtle premium sparkles (less “party”, more “glint”) */
-.spark{position:absolute;width:6px;height:6px;border-radius:50%;pointer-events:none;opacity:0;
-  background:radial-gradient(circle,#fff 0 32%,rgba(255,223,122,.9) 72%);
-  box-shadow:0 0 14px rgba(255,255,255,.75),0 0 28px rgba(255,223,122,.45);
-}
-.spark.tw{animation:glint 4.8s ease-in-out infinite}
-@keyframes glint{0%,100%{opacity:0;transform:scale(.55)}50%{opacity:1;transform:scale(1.45)}}
-
-/* Petals (premium love vibe) */
-.petal{
-  position:absolute;top:-20vh;left:var(--x);width:var(--w);height:var(--h);opacity:0;pointer-events:none;
-  background-repeat:no-repeat;background-size:contain;background-position:center;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 120'%3E%3Cpath d='M40 6C26 20 14 44 16 66c2 24 14 40 24 48 10-8 22-24 24-48C66 44 54 20 40 6Z' fill='rgba(255,111,161,0.42)'/%3E%3Cpath d='M40 10C30 22 22 44 24 64c2 18 10 30 16 36 6-6 14-18 16-36 2-20-6-42-16-54Z' fill='rgba(255,246,233,0.25)'/%3E%3Cpath d='M26 74c10 8 18 12 28 14' stroke='rgba(255,223,122,0.35)' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-  filter:drop-shadow(0 12px 18px rgba(0,0,0,.25));
-  animation:petalFall var(--t) linear forwards;
-  transform:rotate(var(--r));
-}
-@keyframes petalFall{
-  0%{opacity:0;transform:translateY(-20vh) translateX(0) rotate(var(--r))}
-  10%{opacity:var(--o)}
-  100%{opacity:0;transform:translateY(120vh) translateX(var(--dx)) rotate(calc(var(--r) + 360deg))}
+.scroll-wrap{
+  width:min(92vw,380px);
+  cursor:pointer;
 }
 
-/* ===== SCROLL (kept crisp, premium timing) ===== */
-.scroll-wrap{width:min(92vw,380px);cursor:pointer;position:relative;z-index:5;transform:translateZ(0)}
 .rod{
-  height:24px;border-radius:16px;position:relative;
-  background:linear-gradient(90deg,#24160c 0%,#7a5b12 16%,var(--gold) 50%,#7a5b12 84%,#24160c 100%);
-  border:3px solid #4b2f1b;
-  box-shadow:0 12px 30px rgba(0,0,0,.55),inset 0 3px 8px rgba(255,255,255,.35),inset 0 -2px 6px rgba(0,0,0,.25);
+  height:20px;
+  background:var(--gold);
+  border-radius:12px;
+  margin:10px 0;
 }
-.rod:before,.rod:after{
-  content:"";position:absolute;top:-10px;width:38px;height:38px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,#ffefb0 0%,#ffdf7a 20%,#d4af37 52%,#b8860b 100%);
-  border:3px solid #8b6914;
-  box-shadow:0 10px 22px rgba(0,0,0,.6),inset 3px 3px 8px rgba(255,255,255,.5),inset -2px -2px 6px rgba(0,0,0,.25);
-}
-.rod:before{left:-16px}.rod:after{right:-16px}
 
 .scroll{
-  height:170px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:10px;
-  background:
-    radial-gradient(circle at 28% 20%,rgba(255,255,255,.55) 0 22%,transparent 55%),
-    linear-gradient(140deg,var(--paper) 0%,#f7ebd6 30%,var(--paper2) 62%,var(--paper3) 100%);
-  border:3px solid var(--gold); outline:2px solid rgba(27,11,8,.65);
-  box-shadow:0 55px 120px rgba(0,0,0,.52),inset 0 0 0 2px rgba(255,255,255,.35),inset 0 0 28px rgba(212,175,55,.22);
-  transform:perspective(1000px) rotateX(9deg) scale(.995);
-  transition:filter .8s ease,transform .8s ease;
-}
-.scroll .frame{position:absolute;inset:12px;border-radius:8px;border:2px solid rgba(212,175,55,.38);opacity:0;pointer-events:none}
-.scroll .sigil{position:absolute;inset:18px;border-radius:6px;opacity:0;pointer-events:none;
-  background:
-    radial-gradient(circle at 20% 20%,rgba(212,175,55,.30) 0 2px,transparent 3px),
-    radial-gradient(circle at 80% 20%,rgba(225,29,72,.20) 0 2px,transparent 3px),
-    radial-gradient(circle at 20% 80%,rgba(225,29,72,.16) 0 2px,transparent 3px),
-    radial-gradient(circle at 80% 80%,rgba(212,175,55,.30) 0 2px,transparent 3px);
-  background-size:44px 44px;
+  height:160px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--paper);
+  border:2px solid var(--gold);
 }
 
-/* premium glint sweep */
-.scroll:after{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
-  background:linear-gradient(120deg,transparent 0 45%,rgba(255,255,255,.28) 50%,transparent 55% 100%);
-  transform:translateX(-120%) skewX(-12deg);
-}
-.scroll.unveil:after{opacity:1;animation:sweep 2.4s ease-out .2s both}
-@keyframes sweep{0%{transform:translateX(-140%) skewX(-12deg)}100%{transform:translateX(140%) skewX(-12deg)}}
-
-/* premium unroll (less “bouncy”, more “cinema”) */
-.scroll.unveil{
-  animation:unroll 5.2s cubic-bezier(.2,.92,.2,1) forwards;
-  filter:drop-shadow(0 0 26px rgba(255,223,122,.22)) drop-shadow(0 0 38px rgba(255,111,161,.10));
-}
-@keyframes unroll{
-  0%{height:170px;transform:perspective(1000px) rotateX(12deg) scale(.992)}
-  18%{height:260px;transform:perspective(1000px) rotateX(8deg) scale(.997)}
-  42%{height:56vh;transform:perspective(1000px) rotateX(3deg) scale(1)}
-  70%{height:92vh;transform:perspective(1000px) rotateX(0deg) scale(1)}
-  100%{height:92vh;transform:perspective(1000px) rotateX(0deg) scale(1)}
-}
-.scroll.unveil .frame,.scroll.unveil .sigil{opacity:1;transition:opacity 1.4s ease 1s}
-.scroll.unveil .sigil{transition-delay:1.3s}
-
-/* text (no gradient; premium ink + gold frame) */
 .scroll-text{
-  position:relative;z-index:2;text-align:center;padding:0 18px;letter-spacing:2px;
-  font-family:"Great Vibes",cursive;font-size:2.15rem;color:var(--ink);
-  text-shadow:2px 2px 6px rgba(0,0,0,.25);
-  transition:opacity .45s ease,transform .55s ease,filter .55s ease;
-}
-.scroll-text.hidden{opacity:0;transform:translateY(8px) scale(.94);filter:blur(1px)}
-.scroll-text.royal{
-  font-family:"Kaushan Script",cursive;  /* Changed from "Cinzel" to "Allura" */
-  font-size:2.8rem;  /* Slightly larger for better calligraphic effect */
-  font-weight:400;   /* Changed from 700 to 400 for script fonts */
-  letter-spacing:1px; /* Reduced letter spacing for script fonts */
+  font-family:'Great Vibes', cursive;
+  font-size:2rem;
   color:var(--ink);
-  padding:14px 18px;border-radius:12px;
-  border:3px solid var(--gold); outline:2px solid rgba(27,11,8,.55);
-  background:linear-gradient(140deg,rgba(255,255,255,.92) 0%,rgba(255,248,235,.78) 60%,rgba(212,175,55,.10) 100%);
-  text-shadow:1px 1px 0 rgba(255,223,122,.85),2px 2px 0 rgba(212,175,55,.60),6px 10px 18px rgba(0,0,0,.28);
-  box-shadow:0 10px 26px rgba(0,0,0,.18),inset 0 2px 6px rgba(255,255,255,.7),inset 0 -2px 6px rgba(212,175,55,.18);
-  animation:majesty 4.8s ease-in-out infinite;
+  text-align:center;
 }
-@keyframes majesty{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 
-/* ===== APP (unchanged) ===== */
-#app{display:none;height:calc(var(--vh)*100);width:100%;flex-direction:column}
-header{height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  font-family:"Playfair Display SC",serif;letter-spacing:3px;color:#f8e8c6;
-  background:linear-gradient(135deg,#7b2835,#53151f,#2d0a10);
-  border-bottom:3px solid var(--gold);box-shadow:0 4px 10px rgba(0,0,0,.35)}
-.carousel{flex:1 0 auto;overflow:hidden;position:relative;width:100%}
-.track{display:flex;height:100%;width:500%;transition:transform .7s ease}
-.page{width:20%;height:100%;background-size:cover;background-position:center;background-repeat:no-repeat;position:relative}
-.page[style*="1.png"]{background-image:url('./WED-CANVA-MULTI-15/1.png')!important}
-.page[style*="2.png"]{background-image:url('./WED-CANVA-MULTI-15/2.png')!important}
-.page[style*="3.png"]{background-image:url('./WED-CANVA-MULTI-15/3.png')!important}
-.page[style*="4.png"]{background-image:url('./WED-CANVA-MULTI-15/4.png')!important}
-.page[style*="5.png"]{background-image:url('./WED-CANVA-MULTI-15/5.png')!important}
-.page:after{content:"";position:absolute;top:0;right:0;width:80px;height:100%;opacity:0;transition:opacity .25s ease;
-  background:linear-gradient(to left,rgba(0,0,0,.35),transparent)}
-.page.turning:after{opacity:1}
-.page.texture:before{content:"";position:absolute;inset:0;pointer-events:none;
-  background:repeating-linear-gradient(0deg,rgba(0,0,0,.03),rgba(0,0,0,.03) 1px,transparent 1px,transparent 4px);
-  animation:tex 8s linear infinite}
-@keyframes tex{from{transform:translateY(0)}to{transform:translateY(-40px)}}
-.swipe-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:5;
-  background:rgba(0,0,0,.55);color:#fff;padding:10px 18px;border-radius:24px;font-size:.85rem;
-  border:2px solid rgba(212,175,55,.55);box-shadow:0 6px 18px rgba(0,0,0,.35);
-  animation:hint 1.8s infinite}
-@keyframes hint{0%{transform:translate(-50%,0)}50%{transform:translate(-62%,-2px)}100%{transform:translate(-50%,0)}}
-footer{height:60px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-  background:linear-gradient(135deg,#53151f,#2d0a10,#1a0508);border-top:3px solid var(--gold);
-  box-shadow:0 -4px 10px rgba(0,0,0,.35)}
-footer .btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
-footer a,footer button{background:none;border:2px solid #f7e7c3;color:#f7e7c3;padding:7px 14px;border-radius:20px;font-size:.82rem;text-decoration:none}
-footer small{font-size:.65rem;color:#e8d2a6}
+/* ================= APP ================= */
+#app{
+  display:none;
+  height:100dvh;                 /* iOS-safe viewport */
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
 
-/* RSVP */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:20}
-.box{width:90%;max-width:360px;padding:22px;border-radius:14px;position:relative;background:linear-gradient(135deg,#fff6e2,#ecd7b8);border:3px solid var(--gold);box-shadow:0 16px 40px rgba(0,0,0,.35)}
-.close{position:absolute;top:10px;right:12px;cursor:pointer}
-.box h3{font-family:"Playfair Display SC",serif;text-align:center;margin-bottom:14px;color:var(--royal)}
-.box input,.box select{width:100%;margin-bottom:10px;padding:10px;border:1px solid rgba(0,0,0,.2);border-radius:8px}
-.box button{width:100%;padding:10px;background:var(--royal);color:#fff;border:none;border-radius:8px}
+/* HEADER */
+header{
+  height:60px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'Playfair Display SC', serif;
+  letter-spacing:3px;
+  color:#f8e8c6;
+  background:var(--royal);
+}
 
-/* responsive + motion */
-@media (max-width:480px){footer a,footer button{padding:5px 10px;font-size:.75rem}.scroll-text.royal{font-size:1.9rem}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ================= CAROUSEL ================= */
+.carousel{
+  flex:1;
+  overflow:hidden;
+  position:relative;
+}
+
+.track{
+  display:flex;
+  height:100%;
+  width:100%;                    /* 🔑 FIX */
+  transform:translateX(0);
+  transition:transform .45s ease;
+}
+
+.page{
+  flex:0 0 100%;                 /* 🔑 FIX */
+  height:100%;
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-color:#000;
+}
+
+/* swipe hint */
+.swipe-hint{
+  position:absolute;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,.6);
+  color:#fff;
+  padding:8px 14px;
+  border-radius:20px;
+  font-size:.8rem;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  height:60px;
+  flex-shrink:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  background:var(--royal);
+  padding-bottom:env(safe-area-inset-bottom); /* iOS home bar */
+}
+
+footer .btns{
+  display:flex;
+  gap:16px;
+}
+
+footer a,
+footer button{
+  background:none;
+  border:1px solid #f7e7c3;
+  color:#f7e7c3;
+  padding:6px 14px;
+  border-radius:18px;
+  font-size:.8rem;
+  text-decoration:none;
+}
+
+footer small{
+  font-size:.65rem;
+  color:#e8d2a6;
+}
+
+/* ================= RSVP ================= */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:20;
+}
+
+.box{
+  width:90%;
+  max-width:360px;
+  padding:20px;
+  border-radius:12px;
+  background:var(--paper);
+  border:2px solid var(--gold);
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  top:10px;
+  right:12px;
+  cursor:pointer;
+}
+
+.box h3{
+  text-align:center;
+  margin-bottom:12px;
+  color:var(--royal);
+}
+
+.box input,
+.box select{
+  width:100%;
+  margin-bottom:10px;
+  padding:10px;
+}
+
+.box button{
+  width:100%;
+  padding:10px;
+  background:var(--royal);
+  color:#fff;
+  border:none;
+  border-radius:6px;
+}
 </style>
 </head>
 
 <body>
+
+<!-- LANDING -->
 <div id="landing">
-  <!-- corner florals (same elements you already had) -->
-  <div class="magic flower f1"></div>
-  <div class="magic flower f2"></div>
-  <div class="magic flower f3"></div>
-  <div class="magic flower f4"></div>
-
-  <!-- subtle glints (your existing spark nodes still work) -->
-  <div class="spark" style="top:14%;left:22%"></div>
-  <div class="spark" style="top:24%;right:30%"></div>
-  <div class="spark" style="top:44%;left:12%"></div>
-  <div class="spark" style="top:66%;right:22%"></div>
-  <div class="spark" style="top:76%;left:78%"></div>
-  <div class="spark" style="top:86%;right:12%"></div>
-
-  <div class="scroll-wrap" id="openScroll" aria-label="Open invitation">
+  <div class="scroll-wrap" id="openScroll">
     <div class="rod"></div>
-    <div class="scroll" id="scroll">
-      <div class="frame"></div>
-      <div class="sigil"></div>
-      <div class="scroll-text" id="scrollText">Tap to Unveil the Invitation</div>
+    <div class="scroll">
+      <div class="scroll-text">
+        Tap to Unveil the Invitation
+      </div>
     </div>
     <div class="rod"></div>
   </div>
 </div>
 
+<!-- APP -->
 <div id="app">
   <header>Wedding</header>
+
   <div class="carousel">
     <div class="track" id="track">
-      <div class="page texture" style="background-image:url('./WED-CANVA-MULTI-15/1.png')">
+      <div class="page" style="background-image:url('./WED-CANVA-MULTI-15/1.png')">
         <div class="swipe-hint" id="hint">Swipe to continue →</div>
       </div>
       <div class="page" style="background-image:url('./WED-CANVA-MULTI-15/2.png')"></div>
@@ -273,130 +251,63 @@ footer small{font-size:.65rem;color:#e8d2a6}
       <div class="page" style="background-image:url('./WED-CANVA-MULTI-15/5.png')"></div>
     </div>
   </div>
+
   <footer>
     <div class="btns">
-        <a href="https://raayacreations.onrender.com/index.html" target="_blank" rel="noopener">About Us</a>
-      <button type="button" onclick="openRSVP()">RSVP</button>
-      <a href="https://www.google.com/maps?q=Bangalore" target="_blank" rel="noopener">Location</a>
+      <a href="https://raayacreations.onrender.com/index.html" target="_blank">About Us</a>
+      <button onclick="openRSVP()">RSVP</button>
+      <a href="https://www.google.com/maps?q=Bangalore" target="_blank">Location</a>
     </div>
     <small>©2025 | Creations by Raya</small>
   </footer>
 </div>
 
+<!-- RSVP -->
 <div class="modal" id="rsvp">
   <div class="box">
     <div class="close" onclick="closeRSVP()">✕</div>
     <h3>RSVP</h3>
-    <input placeholder="Full Name" />
-    <input placeholder="Phone / Email" />
+    <input placeholder="Full Name">
+    <input placeholder="Phone / Email">
     <select>
       <option>Will you attend?</option>
       <option>Yes</option>
       <option>No</option>
     </select>
-    <input placeholder="Number of Guests" />
-    <button type="button" onclick="closeRSVP()">Submit</button>
+    <input placeholder="Number of Guests">
+    <button onclick="closeRSVP()">Submit</button>
   </div>
 </div>
 
 <script>
-const $=id=>document.getElementById(id);
-const landing=$('landing'),open=$('openScroll'),scroll=$('scroll'),scrollText=$('scrollText'),app=$('app'),track=$('track'),rsvp=$('rsvp');
-const pages=[...document.querySelectorAll('.page')],hint=$('hint');
-const florals=[...document.querySelectorAll('.magic')],sparks=[...document.querySelectorAll('.spark')];
-let opened=false;
+const openScroll=document.getElementById('openScroll');
+const landing=document.getElementById('landing');
+const app=document.getElementById('app');
+const track=document.getElementById('track');
+const pages=[...document.querySelectorAll('.page')];
+const hint=document.getElementById('hint');
+const rsvp=document.getElementById('rsvp');
 
-function setVh(){document.documentElement.style.setProperty('--vh',(innerHeight*0.01)+'px')}
-setVh();addEventListener('resize',setVh);
-
-function addBokeh(n=10){
-  for(let i=0;i<n;i++){
-    const b=document.createElement('div');
-    b.className='bokeh'+(i%3===0?' alt':'');
-    b.style.setProperty('--s', (60+Math.random()*120).toFixed(0)+'px');
-    b.style.setProperty('--x', (Math.random()*100).toFixed(2)+'%');
-    b.style.setProperty('--y', (8+Math.random()*84).toFixed(2)+'%');
-    b.style.setProperty('--t', (7+Math.random()*7).toFixed(2)+'s');
-    b.style.opacity='0';
-    landing.appendChild(b);
-  }
-}
-addBokeh(11);
-
-function petals(count=18){
-  for(let i=0;i<count;i++){
-    setTimeout(()=>{
-      const p=document.createElement('div');
-      p.className='petal';
-      p.style.setProperty('--x',(Math.random()*100).toFixed(2)+'%');
-      p.style.setProperty('--w',(18+Math.random()*18).toFixed(0)+'px');
-      p.style.setProperty('--h',(26+Math.random()*28).toFixed(0)+'px');
-      p.style.setProperty('--r',(-20+Math.random()*40).toFixed(0)+'deg');
-      p.style.setProperty('--dx',((-70+Math.random()*140).toFixed(0))+'px');
-      p.style.setProperty('--t',(6+Math.random()*5).toFixed(2)+'s');
-      p.style.setProperty('--o',(0.22+Math.random()*0.28).toFixed(2));
-      landing.appendChild(p);
-      setTimeout(()=>p.remove(),13000);
-    }, i*140);
-  }
-}
-
-open.onclick=()=>{
-  if(opened) return; opened=true;
-
-  landing.classList.add('magical');
-
-  // premium reveals: florals + soft glints (no “party” bursts)
-  florals.forEach((m,i)=>setTimeout(()=>m.classList.add('show'),180+i*160));
-  sparks.forEach((s,i)=>setTimeout(()=>s.classList.add('tw'),500+i*180));
-
-  // petals start gently as the scroll begins to unveil
-  petals(14);
-  setTimeout(()=>petals(10),1200);
-
-  scroll.classList.add('unveil');
-  scrollText.classList.add('hidden');
-
-  setTimeout(()=>{
-    scrollText.textContent="Kumar's Family invites you";
-    scrollText.classList.remove('hidden');
-    scrollText.classList.add('royal');
-  },520);
-
-  setTimeout(()=>{ landing.style.display='none'; app.style.display='flex'; },5400);
+openScroll.onclick=()=>{
+  landing.style.display='none';
+  app.style.display='flex';
 };
 
-/* Swipe */
+/* swipe */
 let idx=0,sx=0;
 track.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
 track.addEventListener('touchend',e=>{
   const d=e.changedTouches[0].clientX-sx;
-  pages[idx].classList.add('turning');
-  if(d<-60 && idx<4) idx++;
+  if(d<-60 && idx<pages.length-1) idx++;
   if(d>60 && idx>0) idx--;
-  track.style.transform=`translateX(-${idx*20}%)`;
+  track.style.transform=`translateX(-${idx*100}%)`;
   if(hint && idx>0) hint.remove();
-  setTimeout(()=>pages.forEach(p=>p.classList.remove('turning')),300);
-},{passive:true});
-
-/* Desktop drag */
-let down=false,startX=0;
-track.addEventListener('mousedown',e=>{down=true;startX=e.pageX});
-addEventListener('mouseup',e=>{
-  if(!down) return; down=false;
-  const diff=startX-e.pageX;
-  pages[idx].classList.add('turning');
-  if(diff>50 && idx<4) idx++;
-  if(diff<-50 && idx>0) idx--;
-  track.style.transform=`translateX(-${idx*20}%)`;
-  if(hint && idx>0) hint.remove();
-  setTimeout(()=>pages.forEach(p=>p.classList.remove('turning')),300);
 });
-track.addEventListener('mouseleave',()=>down=false);
 
 /* RSVP */
 function openRSVP(){rsvp.style.display='flex'}
 function closeRSVP(){rsvp.style.display='none'}
 </script>
+
 </body>
 </html>
